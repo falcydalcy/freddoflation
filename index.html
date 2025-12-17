@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Freddoflation</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #fff7e6;
+      color: #3b2f2f;
+    }
+
+    header {
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+
+    .card {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🍫 Freddoflation</h1>
+    <p>Tracking the tragic rise in the price of a Freddo over time</p>
+  </header>
+
+  <div class="card">
+    <canvas id="freddoChart"></canvas>
+  </div>
+
+  <footer>
+    <p>Data is approximate. Emotional damage is real.</p>
+  </footer>
+
+  <script>
+    const data = {
+      labels: [
+        '1994', '1998', '2002', '2006', '2010', '2014', '2018', '2020', '2022', '2024'
+      ],
+      datasets: [{
+        label: 'Price of a Freddo (pence)',
+        data: [10, 10, 15, 20, 25, 25, 30, 25, 30, 35],
+        borderWidth: 3,
+        tension: 0.3
+      }]
+    };
+
+    const config = {
+      type: 'line',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Price (p)'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Year'
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.parsed.y + 'p';
+              }
+            }
+          }
+        }
+      }
+    };
+
+    new Chart(
+      document.getElementById('freddoChart'),
+      config
+    );
+  </script>
+
+</body>
+</html>
